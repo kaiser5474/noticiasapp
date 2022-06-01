@@ -6,8 +6,10 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 const ListadoNoticias = () => {
-    const {noticias, totalNoticia} = useNoticias();
+    const {noticias, totalNoticia, handleChangePagina, pagina} = useNoticias();
     console.log(totalNoticia);
+    const totalPagina = Math.ceil(totalNoticia/20);
+    console.log(totalPagina);
   return (
     <>
         <Typography
@@ -22,7 +24,7 @@ const ListadoNoticias = () => {
             {noticias.map(noticia => <Noticia key={noticia.url} noticia={noticia}/>)}            
         </Grid>
         <Stack spacing={2} alignItems="center" justifyContent="center" marginY={5}>            
-            <Pagination count={10} color="primary" />            
+            <Pagination count={totalPagina} color="primary" onChange={handleChangePagina} page={pagina}/>            
         </Stack>
     </>
   )
